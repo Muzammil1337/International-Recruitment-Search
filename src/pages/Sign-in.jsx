@@ -6,24 +6,18 @@ import { MailIcon } from "../assets/Mailicon";
 import { RiLockPasswordLine } from "@react-icons/all-files/ri/RiLockPasswordLine";
 import { GoSignIn } from "@react-icons/all-files/go/GoSignIn";
 import { AuthContext } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState(null);
-  const [errorPass, setErrorPass] = useState(null);
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
-  const [isInvalidPass, setIsInvalidPass] = useState(false);
 
-  const navigate = useNavigate();
   const { SignIn } = useContext(AuthContext);
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
-
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@!#$%^&*]{8,}$/;
 
   const handleEmailChange = (e) => {
     const newEmail = e.target.value;
@@ -44,27 +38,14 @@ const SignIn = () => {
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
-
-    // Validate password using regex
-    const isValidPassword = passwordRegex.test(newPassword);
-    setIsInvalidPass(!isValidPassword); // Set isInvalid based on validation
-
-    // Update error message if necessary
-    if (!isValidPassword) {
-      setErrorPass("Must be strong password");
-    } else {
-      setErrorPass(null); // Clear error if password is valid
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (await SignIn(email, password)) {
-        navigate("/");
-      }
+      await SignIn(email, password);
     } catch (error) {
-      console.log("There is an error", error);
+      console.log(error);
     }
   };
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -113,8 +94,6 @@ const SignIn = () => {
             label="Password"
             placeholder="Enter your password"
             labelPlacement="outside"
-            errorMessage={errorPass}
-            isInvalid={isInvalidPass}
             startContent={
               <RiLockPasswordLine className="text-lg lg:text-2xl text-default-400 pointer-events-none flex-shrink-0" />
             }
@@ -140,7 +119,6 @@ const SignIn = () => {
           />
 
           <Button
-            type="submit"
             color="success"
             variant="flat"
             className="text-base p-4"

@@ -5,7 +5,7 @@ import { EyeFilledIcon } from "../assets/EyeFilledIcon";
 import { MailIcon } from "../assets/Mailicon";
 import { RiLockPasswordLine } from "@react-icons/all-files/ri/RiLockPasswordLine";
 import { GoSignIn } from "@react-icons/all-files/go/GoSignIn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const SignUp = () => {
@@ -18,7 +18,6 @@ const SignUp = () => {
   const [isInvalidPass, setIsInvalidPass] = useState(false);
 
   const { SignUp } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
@@ -60,13 +59,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      if (await SignUp(email, password)) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.log("There is an error", error);
-    }
+    await SignUp(email, password);
   };
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -141,7 +134,6 @@ const SignUp = () => {
           />
 
           <Button
-            type="submit"
             color="success"
             variant="flat"
             className="text-base p-4"

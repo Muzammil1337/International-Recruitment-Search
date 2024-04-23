@@ -18,13 +18,12 @@ import {
   MdOutlineLogin,
 } from "react-icons/md";
 import { AuthContext } from "../context/AuthContext";
+import DropList from "./DropDown";
 
 const Header = () => {
   const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userEmail, isLogged } = useContext(AuthContext);
-
-  console.log(userEmail, isLogged);
 
   const Links = [
     { path: "/", name: "Home", icon: <FaHome /> },
@@ -100,9 +99,7 @@ const Header = () => {
       {isLogged && (
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
-            <Link className="font-bold text-base">
-              Email: <span>{userEmail}</span>
-            </Link>
+              <DropList />
           </NavbarItem>
         </NavbarContent>
       )}

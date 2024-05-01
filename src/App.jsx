@@ -11,42 +11,58 @@ import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { Fragment } from "react";
+import UserFormProvider from "./context/FormContext";
+import UserPage from "./pages/UserPage";
 
 const router = createBrowserRouter([
   {
     element: <AuthProvider />,
     children: [
       {
-        path: "/",
-        element: <Layout />,
+        element: <UserFormProvider />,
         children: [
           {
             path: "/",
-            element: <AuroraHero />,
-          },
-          {
-            path: "/resume-builder",
-            element: (
-              <ProtectedRoute>
-                <ResumeBuilder />
-              </ProtectedRoute>
-            ),
-          },
-          {
-            path: "/about-us",
-            element: <About />,
-          },
-          {
-            path: "/contact-us",
-            element: <Contact />,
-          },
-          {
-            path: "/sign-up",
-            element: <SignUp />,
-          },
-          {
-            path: "/sign-in",
-            element: <SignIn />,
+            element: <Layout />,
+            children: [
+              {
+                path: "/",
+                element: <AuroraHero />,
+              },
+              {
+                path: "/resume-builder",
+                element: (
+                  <ProtectedRoute>
+                    <ResumeBuilder />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: "/user",
+                element: (
+                  <ProtectedRoute>
+                    <UserPage />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: "/about-us",
+                element: <About />,
+              },
+              {
+                path: "/contact-us",
+                element: <Contact />,
+              },
+              {
+                path: "/sign-up",
+                element: <SignUp />,
+              },
+              {
+                path: "/sign-in",
+                element: <SignIn />,
+              },
+            ],
           },
         ],
       },
@@ -56,9 +72,9 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <>
+    <Fragment>
       <ToastContainer />
       <RouterProvider router={router} />
-    </>
+    </Fragment>
   );
 }

@@ -7,6 +7,7 @@ import {
 } from "@nextui-org/react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function DropList() {
   const { userEmail, SignOut } = useContext(AuthContext);
@@ -22,6 +23,9 @@ export default function DropList() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu variant="flat" aria-label="Dropdown menu with shortcut">
+        <DropdownItem className="text-success" color="succes">
+          <Link to="/user" className="w-full">Your Resume</Link>
+        </DropdownItem>
         <DropdownItem
           key="delete"
           className="text-danger"

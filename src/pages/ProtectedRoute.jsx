@@ -3,20 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const { isLogged, isLoading } = useContext(AuthContext);
+  const { isLogged } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log(isLoading, isLogged);
-
   useEffect(() => {
-    // Check authentication status
-    if (!isLogged) {
-      // Redirect to login if not logged in
-      navigate("/sign-in", { replace: true });
+    let isMounted = true; // Track if the component is mounted
+
+    if (isMounted && !isLogged) {
+      // Check mounted state before navigating
+      navigate("/sign-in");
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isLogged, navigate]);
 
-  return isLoading ? null : <>{children}</>;
+  return children;
 };
 
 export default ProtectedRoute;

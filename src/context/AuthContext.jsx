@@ -3,10 +3,11 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../Firebase";
+import { auth, db } from "../Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { doc, onSnapshot } from "firebase/firestore";
 
 export const AuthContext = createContext(null);
 
@@ -14,6 +15,8 @@ export default function AuthProvider() {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
+  const [id, setId] = useState(null);
+  const [data, setData] = useState(null);
 
   const token = JSON.parse(localStorage.getItem("access_token"));
   const navigate = useNavigate();
@@ -21,23 +24,31 @@ export default function AuthProvider() {
   useEffect(() => {
     if (token) {
       setIsLogged(true);
-
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/auth.user
           const uid = user.uid;
           const uemail = user.email;
           setUserEmail(uemail);
-          console.log(uid);
-          navigate("/");
-          // ...
-        } else {
-          console.log("No user found");
+          setId(uid);
+          getUserData(uid);
         }
       });
     }
   }, [token, navigate]);
+
+  const getUserData = (id) => {
+    try {
+      const docRef = doc(db, "User-Info", id); // Correct path to the user's document
+      const sub = onSnapshot(docRef, (doc) => {
+        // Handle the document data here
+        setData(doc.data());
+        console.log(doc.data());
+      });
+      return sub;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const SignIn = async (email, password) => {
     setIsLoading(true);
@@ -54,7 +65,6 @@ export default function AuthProvider() {
       });
     } catch (error) {
       setIsLogged(false);
-      navigate("/sign-in");
       toast.error("(auth/email-or-password-not-found)", {
         position: "top-right",
       });
@@ -77,7 +87,6 @@ export default function AuthProvider() {
       });
     } catch (error) {
       setIsLogged(false);
-      navigate("/sign-up");
       toast.error("(auth/email-already-in-use)", {
         position: "top-right",
       });
@@ -92,6 +101,7 @@ export default function AuthProvider() {
       position: "top-right",
     });
   };
+
   const value = {
     SignIn,
     SignUp,
@@ -99,6 +109,8 @@ export default function AuthProvider() {
     isLoading,
     userEmail,
     SignOut,
+    id,
+    data,
   };
   return (
     <AuthContext.Provider value={value}>

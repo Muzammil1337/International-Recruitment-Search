@@ -34,7 +34,7 @@ export const UserFormProvider = () => {
     try {
       await setDoc(doc(db, "User-Info", id), data);
       setData(INITIAL_STATES);
-      navigate("/resumer-builder");
+      navigate("/user");
       toast.success("Job Seeker Info added successfully for resume");
     } catch (error) {
       console.log(error);

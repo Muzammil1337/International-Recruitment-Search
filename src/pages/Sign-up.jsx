@@ -7,6 +7,7 @@ import { RiLockPasswordLine } from "@react-icons/all-files/ri/RiLockPasswordLine
 import { GoSignIn } from "@react-icons/all-files/go/GoSignIn";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import googleImg from "../assets/google.jpg";
 
 const SignUp = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ const SignUp = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPass, setIsInvalidPass] = useState(false);
 
-  const { SignUp } = useContext(AuthContext);
+  const { SignUp, SignUpWithGoogle } = useContext(AuthContext);
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
@@ -61,6 +62,11 @@ const SignUp = () => {
     e.preventDefault();
     await SignUp(email, password);
   };
+
+  const handleGoogleAuth = () => {
+    SignUpWithGoogle();
+  };
+
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
@@ -133,15 +139,25 @@ const SignUp = () => {
             }}
           />
 
-          <Button
-            color="success"
-            variant="flat"
-            className="text-base p-4"
-            onClick={handleSubmit}
-          >
-            <GoSignIn className="text-lg text-default-400 pointer-events-none flex-shrink-0" />
-            Sign up
-          </Button>
+          <div className="flex gap-2 items-center">
+            <Button
+              color="success"
+              variant="flat"
+              className="text-base p-4 flex-1"
+              onClick={handleSubmit}
+            >
+              <GoSignIn className="text-lg text-default-400 pointer-events-none flex-shrink-0" />
+              Sign up
+            </Button>
+            <Button
+              variant="flat"
+              className="text-base p-4 flex-1 bg-white font-medium items-center"
+              onClick={handleGoogleAuth}
+            >
+              <img src={googleImg} alt="" className="w-5 h-5 object-contain" />
+              Sign Up With Google
+            </Button>
+          </div>
 
           <p className="text-white text-balance">
             Do you have an account? Click here{"  "}

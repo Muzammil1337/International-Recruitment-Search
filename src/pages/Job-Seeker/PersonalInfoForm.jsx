@@ -92,6 +92,67 @@ const PersonalInfoForm = () => {
           Address:
         </span>
       </label>
+
+      <br />
+      <label htmlFor="website" className="relative block w-full">
+        <input
+          type="text"
+          id="website"
+          name="website"
+          value={data.PersonalInfo.website}
+          onChange={handleChange}
+          className="px-2 peer w-full rounded border border-neutral-400 p-4 text-sm transition-shadow focus:ring-1 focus:ring-offset-0 focus:border-indigo-400 focus:outline-none text-black"
+        />
+        <span
+          className="absolute left-2 top-0 -translate-y-1/2
+        scale-100 bg-violet-500 rounded px-0.5 text-sm text-white font-medium transition-transform
+        peer-focus:scale-0
+        "
+        >
+          Your personal website Link:
+        </span>
+      </label>
+
+      <br />
+      <label htmlFor="github" className="relative block w-full">
+        <input
+          type="text"
+          id="github"
+          name="github"
+          value={data.PersonalInfo.github}
+          onChange={handleChange}
+          className="px-2 peer w-full rounded border border-neutral-400 p-4 text-sm transition-shadow focus:ring-1 focus:ring-offset-0 focus:border-indigo-400 focus:outline-none text-black"
+        />
+        <span
+          className="absolute left-2 top-0 -translate-y-1/2
+        scale-100 bg-violet-500 rounded px-0.5 text-sm text-white font-medium transition-transform
+        peer-focus:scale-0
+        "
+        >
+          Github Account Link:
+        </span>
+      </label>
+
+      <br />
+      <label htmlFor="linkedIn" className="relative block w-full">
+        <input
+          type="text"
+          id="linkedIn"
+          name="linkedIn"
+          value={data.PersonalInfo.linkedin}
+          onChange={handleChange}
+          className="px-2 peer w-full rounded border border-neutral-400 p-4 text-sm transition-shadow focus:ring-1 focus:ring-offset-0 focus:border-indigo-400 focus:outline-none text-black"
+        />
+        <span
+          className="absolute left-2 top-0 -translate-y-1/2
+        scale-100 bg-violet-500 rounded px-0.5 text-sm text-white font-medium transition-transform
+        peer-focus:scale-0
+        "
+        >
+          LinkedIn Account Link:
+        </span>
+      </label>
+
       <br />
     </form>
   );

@@ -1,9 +1,10 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth, db } from "../Firebase";
+import { GoogleProvider, auth, db } from "../Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -93,6 +94,28 @@ export default function AuthProvider() {
     }
   };
 
+  const SignUpWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, GoogleProvider);
+      localStorage.setItem(
+        "access_token",
+        JSON.stringify(res._tokenResponse.idToken)
+      );
+      setIsLoading(false);
+      console.log(res);
+      navigate("/");
+      toast.success("Signed In with Google!", {
+        position: "top-right",
+      });
+    } catch (error) {
+      console.log(error);
+      setIsLogged(false);
+      toast.error("(auth/email-already-in-use)", {
+        position: "top-right",
+      });
+    }
+  };
+
   const SignOut = () => {
     localStorage.removeItem("access_token");
     setIsLogged(false);
@@ -111,6 +134,7 @@ export default function AuthProvider() {
     SignOut,
     id,
     data,
+    SignUpWithGoogle,
   };
   return (
     <AuthContext.Provider value={value}>

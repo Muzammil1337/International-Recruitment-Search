@@ -23,7 +23,7 @@ export default function DropList() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu variant="flat" aria-label="Dropdown menu with shortcut">
-        <DropdownItem className="text-success" color="succes">
+        <DropdownItem className="text-success w-full" color="succes">
           <Link to="/user" className="w-full">Your Resume</Link>
         </DropdownItem>
         <DropdownItem

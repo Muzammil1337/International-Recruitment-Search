@@ -7,14 +7,19 @@ import { Outlet, useNavigate } from "react-router-dom";
 export const UserFormContext = createContext(null);
 
 const INITIAL_STATES = {
+  summary: "",
   PersonalInfo: {
     name: "",
     email: "",
     phone: "",
     address: "",
+    website: "",
+    github: "",
+    linkedin: "",
   },
   WorkExperience: [],
   Education: [],
+  Skills: [],
 };
 
 export const UserFormProvider = () => {

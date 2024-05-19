@@ -6,28 +6,19 @@ import WorkExperienceForm from "./WorkExperienceForm";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { UserFormContext } from "../../context/FormContext";
+import UserSkillsForm from "./User-Skills";
+import UserSummaryForm from "./User-Summary-Section";
 
 const steps = [
   { title: "Personal Information", content: <PersonalInfoForm /> },
+  { title: "Summary", content: <UserSummaryForm /> },
   { title: "Work Experience", content: <WorkExperienceForm /> },
   { title: "Education", content: <EducationForm /> },
+  { title: "Skills", content: <UserSkillsForm /> },
 ];
 
 const JobSeekerForm = () => {
-  const { currentStepIndex, step, next, prev } = UseMultiForm([
-    {
-      title: "Personal Information",
-      content: <PersonalInfoForm />,
-    },
-    {
-      title: "Work Experience",
-      content: <WorkExperienceForm />,
-    },
-    {
-      title: "Education",
-      content: <EducationForm />,
-    },
-  ]);
+  const { currentStepIndex, step, next, prev } = UseMultiForm(steps);
 
   const calculateProgress = () => {
     return (currentStepIndex + 1) / steps.length;
@@ -37,7 +28,8 @@ const JobSeekerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (currentStepIndex === 2) {
+    if (currentStepIndex === steps.length - 1) {
+      // Adjusted to check for the last step
       AddToDatabase(id);
     } else {
       next();

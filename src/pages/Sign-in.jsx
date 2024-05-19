@@ -7,6 +7,7 @@ import { RiLockPasswordLine } from "@react-icons/all-files/ri/RiLockPasswordLine
 import { GoSignIn } from "@react-icons/all-files/go/GoSignIn";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import googleImg from "../assets/google.jpg";
 
 const SignIn = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,7 +16,7 @@ const SignIn = () => {
   const [errorEmail, setErrorEmail] = useState(null);
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
 
-  const { SignIn } = useContext(AuthContext);
+  const { SignIn, SignUpWithGoogle } = useContext(AuthContext);
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
 
@@ -47,6 +48,10 @@ const SignIn = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleGoogleAuth = () => {
+    SignUpWithGoogle();
   };
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -118,15 +123,26 @@ const SignIn = () => {
             }}
           />
 
-          <Button
-            color="success"
-            variant="flat"
-            className="text-base p-4"
-            onClick={handleSubmit}
-          >
-            <GoSignIn className="text-lg text-default-400 pointer-events-none flex-shrink-0" />
-            Sign In
-          </Button>
+          <div className="flex gap-4 items-center">
+            <Button
+              color="success"
+              variant="flat"
+              className="text-base p-4 flex-1"
+              onClick={handleSubmit}
+            >
+              <GoSignIn className="text-lg text-default-400 pointer-events-none flex-shrink-0" />
+              Sign In
+            </Button>
+
+            <Button
+              variant="flat"
+              className="text-base p-4 flex-1 bg-white font-medium"
+              onClick={handleGoogleAuth}
+            >
+              <img src={googleImg} alt="" className="w-5 h-5 object-contain" />
+              Sign In With Google
+            </Button>
+          </div>
 
           <p className="text-white text-balance">
             Don&apos;t you have an account? Click here{"  "}

@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Fragment } from "react";
 import UserFormProvider from "./context/FormContext";
 import UserPage from "./pages/UserPage";
+import MyResume from "./pages/My-Resume";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
               {
                 path: "/sign-in",
                 element: <SignIn />,
+              },
+              {
+                path: "/my-resume",
+                element: <MyResume />,
               },
             ],
           },

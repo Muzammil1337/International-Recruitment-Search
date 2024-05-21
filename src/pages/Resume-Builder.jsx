@@ -36,18 +36,3 @@ const ResumeBuilder = () => {
 };
 
 export default ResumeBuilder;
-
-// <h1 className="text-balance text-4xl font-bold">
-// Ready for the Next Step
-// </h1>
-
-// <div className="space-x-8">
-// <Button color="primary" size="lg">
-//   Employeer
-// </Button>
-// <Button color="primary" size="lg">
-//   Job Seeker
-// </Button>
-// </div>
-
-// disabled={isClick == 0}

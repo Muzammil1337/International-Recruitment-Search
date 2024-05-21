@@ -15,6 +15,7 @@ export const AuthContext = createContext(null);
 export default function AuthProvider() {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadData, setLoadData] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [id, setId] = useState(null);
   const [data, setData] = useState(null);
@@ -38,16 +39,21 @@ export default function AuthProvider() {
   }, [token, navigate]);
 
   const getUserData = (id) => {
+    setLoadData(true); // Start in the loading state
+
     try {
-      const docRef = doc(db, "User-Info", id); // Correct path to the user's document
-      const sub = onSnapshot(docRef, (doc) => {
-        // Handle the document data here
+      const docRef = doc(db, "User-Info", id);
+
+      const unsubscribe = onSnapshot(docRef, (doc) => {
         setData(doc.data());
         console.log(doc.data());
+        setLoadData(false); // Data is ready, turn off loading
       });
-      return sub;
+
+      return unsubscribe; // Return the unsubscribe function
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      setLoadData(false); // Something went wrong, still turn off loading
     }
   };
 
@@ -135,6 +141,7 @@ export default function AuthProvider() {
     id,
     data,
     SignUpWithGoogle,
+    loadData,
   };
   return (
     <AuthContext.Provider value={value}>

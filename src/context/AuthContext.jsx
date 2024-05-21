@@ -116,7 +116,7 @@ export default function AuthProvider() {
     } catch (error) {
       console.log(error);
       setIsLogged(false);
-      toast.error(error, {
+      toast.error("(auth/email-already-in-use)", {
         position: "top-right",
       });
     }

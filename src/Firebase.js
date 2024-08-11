@@ -6,13 +6,23 @@ import { getFirestore } from "firebase/firestore";
 //
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBUiH4yJJTgNNl7g-s5j8NQ9RE6pOHg-UE",
-  authDomain: "international-recruitment.firebaseapp.com",
-  projectId: "international-recruitment",
-  storageBucket: "international-recruitment.appspot.com",
-  messagingSenderId: "516582616113",
-  appId: "1:516582616113:web:9274f3010239c63a1af910",
+
+  apiKey: "AIzaSyAZKqKB6cRwSL_eXZpE-5_MCtairYA7RqI",
+
+  authDomain: "international-project-3f839.firebaseapp.com",
+
+  projectId: "international-project-3f839",
+
+  storageBucket: "international-project-3f839.appspot.com",
+
+  messagingSenderId: "214950002739",
+
+  appId: "1:214950002739:web:4d01448283af553cd8e346",
+
+  measurementId: "G-SEQ5KNDLBX"
+
 };
+
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

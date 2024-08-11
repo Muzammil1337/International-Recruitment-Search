@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Add this CSS to your global stylesheet or within a styled-components setup */
+.cv-link {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .cv-link:hover {
+    color: blue;
+  }
+  

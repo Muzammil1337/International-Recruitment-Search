@@ -134,11 +134,11 @@ const PersonalInfoForm = () => {
       </label>
 
       <br />
-      <label htmlFor="linkedIn" className="relative block w-full">
+      <label htmlFor="github" className="relative block w-full">
         <input
           type="text"
-          id="linkedIn"
-          name="linkedIn"
+          id="linkedin"
+          name="linkedin"
           value={data.PersonalInfo.linkedin}
           onChange={handleChange}
           className="px-2 peer w-full rounded border border-neutral-400 p-4 text-sm transition-shadow focus:ring-1 focus:ring-offset-0 focus:border-indigo-400 focus:outline-none text-black"
@@ -154,6 +154,31 @@ const PersonalInfoForm = () => {
       </label>
 
       <br />
+      <label htmlFor="format" className="relative block w-full">
+        <select
+          id="format"
+          name="format"
+          value={data.PersonalInfo.format}
+          onChange={handleChange}
+          className="px-2 peer w-full rounded border border-neutral-400 p-4 text-base transition-shadow focus:ring-1 focus:ring-offset-0 focus:border-indigo-400 focus:outline-none text-black bg-white"
+        >
+          <option value="" disabled>
+            Select Format
+          </option>
+          <option value="Germany">Germany</option>
+          <option value="France">France</option>
+          <option value="Italy">Italy</option>
+          <option value="USA">USA</option>
+        </select>
+        <span
+          className="absolute left-2 top-0 -translate-y-1/2
+          scale-100 bg-violet-500 rounded px-0.5 text-sm text-white font-medium transition-transform
+          peer-focus:scale-0
+          "
+        >
+          Select Format:
+        </span>
+      </label>
     </form>
   );
 };

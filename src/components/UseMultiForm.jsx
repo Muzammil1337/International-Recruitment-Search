@@ -21,6 +21,7 @@ const UseMultiForm = (steps) => {
     setCurrentStepIndex(index);
   };
 
+
   return { currentStepIndex, step: steps[currentStepIndex], next, prev, goTo };
 };
 

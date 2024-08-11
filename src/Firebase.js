@@ -3,17 +3,15 @@ import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-const apiKey = import.meta.env.VITE_API_KEY;
-const appId = import.meta.env.VITE_APP_ID;
-const messageSenderId = import.meta.env.VITE_MESSAGE_SENDER_ID;
+//
 
 const firebaseConfig = {
-  apiKey: apiKey,
-  authDomain: "international-recruitment-app.firebaseapp.com",
-  projectId: "international-recruitment-app",
-  storageBucket: "international-recruitment-app.appspot.com",
-  messagingSenderId: messageSenderId,
-  appId: appId,
+  apiKey: "AIzaSyBUiH4yJJTgNNl7g-s5j8NQ9RE6pOHg-UE",
+  authDomain: "international-recruitment.firebaseapp.com",
+  projectId: "international-recruitment",
+  storageBucket: "international-recruitment.appspot.com",
+  messagingSenderId: "516582616113",
+  appId: "1:516582616113:web:9274f3010239c63a1af910",
 };
 
 const app = initializeApp(firebaseConfig);
